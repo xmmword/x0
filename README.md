@@ -41,7 +41,7 @@ At the end of all of this, `BOOTX64` will be chainloaded so that we can boot int
 - Performing the installation of the UEFI bootkit and bootkit loader
 - Providing a bootkit-less hardware spoofing solution that utilizes a kernel driver for modifying SMBIOS tables.
 
-### Demonstration
+### Chart
 ![image](https://user-images.githubusercontent.com/105472509/205988550-80a6d34f-fdde-4a12-aa56-af762e9e353e.png)
 
 ### Built with
