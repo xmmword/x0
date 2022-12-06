@@ -11,10 +11,10 @@ An x64 bootkit and usermode companion program that performs hardware spoofing an
 - Kernel Driver
 - Userspace Command-line Companion Program
 
-Only 2 of these components are crucial for `x0` to work properly, the kernel driver is optional as it just provides extra features for the userspace program.
-The main purpose of userspace program is to:
+Only 2 of these components are crucial for `x0` to work properly, the kernel driver is optional as it just provides extra features for the userspace client.
+The main purpose of `x0` userspace client is to:
 - Overwrite the native bootloader of the OS (usually GRUB) with the code of the bootkit loader
-- Bootkit gets copied to the ESP (EFI System Partition)
+- Copy bootkit to the ESP (EFI System Partition)
 - Invoke a reboot
 - Bootkit loader gets executed
 
