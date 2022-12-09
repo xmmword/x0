@@ -1,0 +1,40 @@
+[Defines]
+  INF_VERSION = 1.25
+  BASE_NAME = x0
+  FILE_GUID = 70e9666c-e902-4738-89cc-49b62b4985cf
+  MODULE_TYPE = DXE_RUNTIME_DRIVER
+  VERSION_STRING = 1.0
+  ENTRY_POINT = UefiEntry
+  UNLOAD_IMAGE = UefiExit
+ 
+[Sources]
+  UefiDriverMain.c
+  SmBios.c
+  Hooks.c
+  Utils.c
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+ 
+[LibraryClasses]
+  UefiLib
+  BaseMemoryLib
+  UefiRuntimeLib
+  MemoryAllocationLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+ 
+[Depex]
+  TRUE
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+  gEfiEventVirtualAddressChangeGuid
+
+[Ppis]
+ 
+[Protocols]
+ 
+[FeaturePcd]
+ 
+[Pcd]

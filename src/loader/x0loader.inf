@@ -1,0 +1,33 @@
+[Defines]
+  INF_VERSION = 1.25
+  BASE_NAME = x0loader
+  FILE_GUID = 48d8d6cf-72cf-4655-acc2-93a9247d0c9a
+  MODULE_TYPE = UEFI_APPLICATION
+  VERSION_STRING = 1.0
+  ENTRY_POINT = UefiEntry
+ 
+[Sources]
+  UefiMain.c
+  EfiLoad.c
+  Utils.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+ 
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  BaseMemoryLib
+  FileHandleLib
+  MemoryAllocationLib
+  UefiApplicationEntryPoint
+
+[Guids]
+
+[Ppis]
+ 
+[Protocols]
+ 
+[FeaturePcd]
+ 
+[Pcd]
