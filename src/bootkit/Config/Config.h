@@ -16,36 +16,18 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __SMBIOS_H
-#define __SMBIOS_H
+#ifndef __CONFIG_H
+#define __CONFIG_H
 
-#include <Uefi.h>
-#include <Guid/EventGroup.h>
-#include <Library/UefiLib.h>
-#include <Library/BaseMemoryLib.h>
-#include <Library/MemoryAllocationLib.h>
-#include <Library/UefiBootServicesTableLib.h>
-#include <Library/UefiRuntimeServicesTableLib.h>
-#include <IndustryStandard/SmBios.h>
-
-#define BUFFER_SIZEMAX       1024
-#define CONFIG_TABLE_SIZEMAX 1000
+#define CONFIG_PATCH_SMBIOS
+#define CONFIG_SPOOF_SECUREBOOT
 
 
 /*
-    *    src/bootkit/SmBios.h
+    *    src/bootkit/Config/Config.h
     *    Date: 12/14/22
     *    Author: @xmmword
 */
 
-
-UINT64 ReturnRdtsc(VOID);
-BOOLEAN IsValidCharacter(const UINT8 Character);
-
-UINTN GetSmBiosStringLength(const UINT8 *Memory);
-UINT8 *GenerateXorString(const UINT8 *Data, const UINTN Length);
-
-VOID PatchSmBiosTables(VOID *TableAddress);
-SMBIOS_TABLE_ENTRY_POINT *ReturnSmBiosEntryPointAddress(VOID);
 
 #endif

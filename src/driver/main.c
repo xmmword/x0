@@ -29,12 +29,17 @@ MODULE_LICENSE("GPL"); /* Kernel driver license. */
 
 /*
     *    src/driver/main.c
-    *    Date: 09/28/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
 
 extern const struct file_operations operations; /* Structure containing initialization/de-initialization functions and the IOCTL handler. */
+
+/**
+ * @brief Entry point for x0 companion kernel driver.
+ * @returns KERN_SUCCESS on success, KERN_FAILURE on failure.
+ */
 
 static __init int driver_entry(void) {
   printk(KERN_INFO "Initializing the x0client driver\n");
@@ -43,6 +48,10 @@ static __init int driver_entry(void) {
 
   return KERN_SUCCESS;
 }
+
+/**
+ * @brief Exit point for dpatch.
+ */
 
 static __exit void driver_exit(void) {
   printk(KERN_INFO "Exiting the x0client driver\n");

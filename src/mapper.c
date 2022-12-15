@@ -22,7 +22,7 @@
 
 /*
     *    src/mapper.c
-    *    Date: 07/17/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
@@ -61,8 +61,8 @@ static inline __always_inline loader_status_t create_driver_interface(void) {
 }
 
 /**
- * @brief Removes a kernel module.
- * @param driver The name of the kernel module that will be removed.
+ * @brief Unmaps a kernel driver from kernel memory.
+ * @param driver The name of the kernel driver.
  * @returns True if the module was able to be removed, false if otherwise.
  */
 

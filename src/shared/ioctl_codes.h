@@ -24,7 +24,8 @@
 #define IOCTL_MAGIC_VAL 0x65 /* IOCTL magic value. */
 
 /* x0 driver IOCTLs. */
-#define IOCTL_DUMP_RUNTIME_SERVICE_TABLE _IOWR(IOCTL_MAGIC_VAL, 1, ioctl_struct_t *)
+#define IOCTL_GET_SMBIOS_TABLE_VIRTADDR         _IOWR(IOCTL_MAGIC_VAL, 1, ioctl_struct_t *)
+#define IOCTL_DUMP_RUNTIME_SERVICE_TABLE        _IOWR(IOCTL_MAGIC_VAL, 2, ioctl_struct_t *)
 
 /* x0 driver interface information. */
 #define X0_DRIVER "x0driver" /* x0 driver name. */
@@ -35,7 +36,7 @@
 
 /*
     *    src/shared/ioctl_codes.h
-    *    Date: 07/17/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 

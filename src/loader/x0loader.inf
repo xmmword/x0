@@ -5,7 +5,7 @@
   MODULE_TYPE = UEFI_APPLICATION
   VERSION_STRING = 1.0
   ENTRY_POINT = UefiEntry
- 
+
 [Sources]
   UefiMain.c
   EfiLoad.c
@@ -13,7 +13,7 @@
 
 [Packages]
   MdePkg/MdePkg.dec
- 
+
 [LibraryClasses]
   UefiLib
   BaseLib
@@ -25,9 +25,9 @@
 [Guids]
 
 [Ppis]
- 
+
 [Protocols]
- 
+
 [FeaturePcd]
- 
+
 [Pcd]

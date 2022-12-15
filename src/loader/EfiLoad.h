@@ -33,13 +33,13 @@
 
 #include "PeStructs.h"
 
-#define EFI_X0_PATH L"\\EFI\\x0.efi"
-#define EFI_BOOT_BOOTX64_PATH L"\\EFI\\BOOT\\BOOTX64.EFI"
+#define EFI_X0_PATH L"\\EFI\\x0.efi" /* Path to the UEFI bootkit. */
+#define EFI_BOOT_BOOTX64_PATH L"\\EFI\\BOOT\\BOOTX64.EFI" /* Path to the fallback bootloader. */
 
 
 /*
     *    src/loader/EfiLoad.h
-    *    Date: 11/27/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 

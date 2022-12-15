@@ -6,16 +6,16 @@
   VERSION_STRING = 1.0
   ENTRY_POINT = UefiEntry
   UNLOAD_IMAGE = UefiExit
- 
+
 [Sources]
   UefiDriverMain.c
   SmBios.c
   Hooks.c
   Utils.c
- 
+
 [Packages]
   MdePkg/MdePkg.dec
- 
+
 [LibraryClasses]
   UefiLib
   BaseMemoryLib
@@ -23,18 +23,19 @@
   MemoryAllocationLib
   UefiDriverEntryPoint
   UefiBootServicesTableLib
- 
+
 [Depex]
   TRUE
 
 [Guids]
+  gEfiSmbiosTableGuid
   gEfiEventExitBootServicesGuid
   gEfiEventVirtualAddressChangeGuid
 
 [Ppis]
- 
+
 [Protocols]
- 
+
 [FeaturePcd]
- 
+
 [Pcd]

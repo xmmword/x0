@@ -22,7 +22,7 @@
 
 /*
     *    src/driver/ioctl.c
-    *    Date: 09/28/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
@@ -59,9 +59,22 @@ long int driver_ioctl_handler(struct file *file, const unsigned int command, con
       memcpy(&ioctl_struct.buffer, table, EFI_RT_TABLE_SIZE);
       iounmap(table);
 
-      if (copy_to_user((ioctl_struct_t *)argument, &ioctl_struct, sizeof(ioctl_struct)))
+      return ((copy_to_user((ioctl_struct_t *)argument, &ioctl_struct, 
+          sizeof(ioctl_struct))) ? IOCTL_FAILURE : IOCTL_SUCCESS);
+    case IOCTL_GET_SMBIOS_TABLE_VIRTADDR:
+      if (copy_from_user(&ioctl_struct, (ioctl_struct_t *)argument, sizeof(ioctl_struct)))
         return IOCTL_FAILURE;
 
+      smbios_table_entry_point_t *smbios_entry_point = phys_to_virt(ioctl_struct.address);
+      if (!smbios_entry_point)
+        return IOCTL_FAILURE;
+
+      void *smbios_table_address = phys_to_virt(smbios_entry_point->TableAddress);
+      if (!smbios_table_address)
+        return IOCTL_FAILURE;
+
+      memcpy(&ioctl_struct.address, &(uintptr_t){(uintptr_t)smbios_table_address}, sizeof(uintptr_t));
+      
       return ((copy_to_user((ioctl_struct_t *)argument, &ioctl_struct, 
           sizeof(ioctl_struct))) ? IOCTL_FAILURE : IOCTL_SUCCESS);
   }

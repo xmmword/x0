@@ -24,10 +24,41 @@
 
 /*
     *    src/ioctl.c
-    *    Date: 07/17/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
+
+/**
+ * @brief Returns the kernel virtual address of the SMBIOS table. 
+ * @returns CLIENT_STATUS_SUCCESS if the kernel virtual address SMBIOS table could be found, CLIENT_STATUS_FAILURE if otherwise.
+ */
+
+client_status_t return_smbios_virtaddr(void) {
+  ioctl_struct_t memory = {0};
+
+  if (!(memory.address = return_smbios_address())) {
+    printf("Failed to get address of the SMBIOS Entry Point Table\n");
+
+    return CLIENT_STATUS_FAILURE;
+  }
+
+  int descriptor = open(X0_DEVICE_INTERFACE, O_RDWR);
+  if (descriptor == -1)
+    return CLIENT_STATUS_FAILURE;
+
+  if (ioctl(descriptor, IOCTL_GET_SMBIOS_TABLE_VIRTADDR, &memory) == -1) {
+    printf("Failed to communicate with the x0 driver!\n");
+
+    close(descriptor);
+    return CLIENT_STATUS_FAILURE;
+  }
+
+  printf("SMBIOS kernel virtual address: 0x%lx\n", memory.address);
+
+  close(descriptor);
+  return CLIENT_STATUS_SUCCESS;
+}
 
 /**
  * @brief Dumps the data of UEFI Runtime Service Table.

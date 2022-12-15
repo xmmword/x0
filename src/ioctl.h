@@ -31,11 +31,12 @@
 
 /*
     *    src/ioctl.h
-    *    Date: 07/17/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
 
+client_status_t return_smbios_virtaddr(void);
 client_status_t dump_runtime_service_table(void);
 
 #endif

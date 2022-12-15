@@ -31,20 +31,22 @@
 #include "status.h"
 #include "shared/structs.h"
 
-#define SYS_FIRMWARE_EFI_RUNTIME_PATH "/sys/firmware/efi/runtime"
+#define SYS_FIRMWARE_EFI_SYSTAB_PATH  "/sys/firmware/efi/systab"  /* Path to the efi/systab. */
+#define SYS_FIRMWARE_EFI_RUNTIME_PATH "/sys/firmware/efi/runtime" /* Path to the efi/runtime. */
 
 
 /*
     *    src/utils.h
-    *    Date: 09/28/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
 
 off_t return_file_size(const char* restrict filepath);
-
 uint8_t* restrict malloc_file(const char* restrict filepath);
+
 uintptr_t return_rtable_address(void);
+uintptr_t return_smbios_address(void);
 
 client_status_t print_rtable_address(void);
 client_status_t map_kernel_driver(void);

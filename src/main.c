@@ -28,7 +28,7 @@
 
 /*
     *    src/main.c
-    *    Date: 07/17/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
@@ -41,7 +41,9 @@ static client_status_t handle_args(char **argv, const int argc);
 static const flag_t opt_table[OPTAMOUNT_MAX] = {
   {"-h", "--help", "\tDisplays all the available flags", print_help},
   {"-m", "--map-driver", "Maps the x0 driver onto kernel memory (more options will be use-able)", map_kernel_driver},
+  {"-u", "--unmap-driver", "Unmaps the x0 driver from kernel memory", remove_kernel_driver},
   {"-a", "--address-rt", "Dump the address of the UEFI Runtime Service Table", print_rtable_address},
+  {"-s", "--address-smbios", "Dump the address of the SMBIOS Table containing type0, type1, type2 tables etc", return_smbios_virtaddr},
   {"-d", "--dump-rt-table", "Dump UEFI Runtime Service Table data", dump_runtime_service_table}
 };
 

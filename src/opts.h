@@ -21,12 +21,12 @@
 
 #include "status.h"
 
-#define OPTAMOUNT_MAX 4 /* The amount of command-line options. */
+#define OPTAMOUNT_MAX 6 /* The amount of command-line options. */
 
 
 /*
     *    src/opts.h
-    *    Date: 07/17/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 

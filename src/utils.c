@@ -22,7 +22,7 @@
 
 /*
     *    src/utils.c
-    *    Date: 09/28/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
@@ -36,7 +36,9 @@
 off_t return_file_size(const char* restrict filepath) {
   struct stat st_stat = {0};
 
-  return ((stat(filepath, &st_stat) == -1) ? 0 : st_stat.st_size);
+  return (
+    (stat(filepath, &st_stat) == -1) ? 0 : st_stat.st_size
+  );
 }
 
 /**
@@ -56,6 +58,31 @@ uint8_t* restrict malloc_file(const char* restrict filepath) {
     return NULL;
 
   return memory;
+}
+
+/**
+ * @brief Returns the address of the SMBIOS Entry Point Table.
+ * @returns The address of the SMBIOS Entry Point Table, 0 if otherwise.
+ */
+
+uintptr_t return_smbios_address(void) {
+  uintptr_t address = 0;
+  char buffer[BUFSIZ] = {0};
+
+  FILE *descriptor = fopen(SYS_FIRMWARE_EFI_SYSTAB_PATH, "r");
+  if (!descriptor)
+    return 0;
+
+  while (fgets(buffer, sizeof(buffer), descriptor)) {
+    if (sscanf(buffer, "SMBIOS=%lx", &address)) {
+      fclose(descriptor);
+
+      return address;
+    }
+  }
+
+  fclose(descriptor);
+  return 0;
 }
 
 /**

