@@ -1,5 +1,5 @@
 # x0
-An x64 bootkit, usermode client, and kernel driver that performs hardware spoofing and virtualbox hardening.
+An x64 Linux bootkit that performs hardware spoofing and virtualbox hardening.
 
 <div align="center">
     <img src=https://user-images.githubusercontent.com/105472509/207756908-b8fd715f-268a-4e44-8513-df881cc90d39.png width="750px"><br>
