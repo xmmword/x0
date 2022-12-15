@@ -21,7 +21,7 @@ On execution, the bootkit loader does 3 main things:
 
 When the bootkit gets loaded, it performs of series of tasks depending on how it's configured:
 - Hooking `GetVariable` and `SetVariable` via swapping pointers in the system table, and then updating the CRC32 checksum
-- Creating an event for `SetVirtualAddressMap` which calls `gRT->ConvertPointer(...)` to convert the pointer of the original `GetVariable` and `SetVariable`
+- Creating an event for `SetVirtualAddressMap` which calls `gRT->ConvertPointer(...)` to convert the pointer of the original `GetVariable` and `SetVariable` to virtual mode
 - Scans the configuration tables in the system table    (Depending on configuration)
 - If the table gets found, then the bootkit will patch it (Depending on configuration)
 
