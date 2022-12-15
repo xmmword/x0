@@ -43,6 +43,12 @@ At the end of all of this, `BOOTX64` will be chainloaded so that we can boot int
 ### Built with
 - C
 
+### Windows Support
+As of now the UEFI driver itself should work on Windows as well, but it may not be able to spoof SecureBoot. The bootkit can also be used for windows, but you might have to edit the path to the bootloader that the bootkit loader will chainload. (`src/loader/EfiLoad.h`)
+
+### Disclaimer
+The bootkit itself **can** be loaded individually and used to get around hardware-based bans on some games, however in the case that someone gets banned for using the bootkit to evade a ban for a game, I am **not** responsible for that. You have been warned.
+
 ## Getting started
 ### Compiling
 First, take a look at this tutorial from OSdev on how to setup EDK2: https://wiki.osdev.org/EDK2
