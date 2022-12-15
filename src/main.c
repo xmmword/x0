@@ -23,6 +23,7 @@
 #include "opts.h"
 #include "ioctl.h"
 #include "utils.h"
+#include "mapper.h"
 #include "status.h"
 
 
