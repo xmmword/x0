@@ -53,6 +53,17 @@ the paths to the `.inf` files in the `src` directory of the `x0` folder into the
 Once EDK2 is properly setup, you can compile `x0` by executing the following script:
 - `./build.sh`
 
+### UEFI Bootkit Installation
+In order to install the bootkit (and load it), follow these instructions:
+- Copy the compiled bootkit and bootkit loader (`x0.efi` and `x0loader.efi`) into the EFI System Partition (AKA `/boot/efi/EFI`)
+- Execute `systemctl --firmware-setup reboot`
+- Select the boot manager option and then select the 'EFI Shell' option
+- Once booted in the EFI shell, enter the `fs0` mapping by running `fs0:`
+- Execute the following commands:
+    * `cd EFI`
+    * `x0loader.efi`
+- The bootkit loader will load the bootkit and then boot into the OS
+
 ### Usage
 - `./x0client [-h, --help]`
 
