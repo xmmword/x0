@@ -45,7 +45,12 @@ At the end of all of this, `BOOTX64` will be chainloaded so that we can boot int
 
 ## Getting started
 ### Compiling
-To compile `x0`, simply execute the following script:
+First, take a look at this tutorial from OSdev on how to setup EDK2: https://wiki.osdev.org/EDK2
+
+Once you're done with that, make sure that you `git clone` this repository within the EDK2 directory, and add
+the paths to the `.inf` files in the `src` directory of the `x0` folder into the `[Components]` section in `MdeModulePkg/MdeModulePkg.dsc`
+
+Once EDK2 is properly setup, you can compile `x0` by executing the following script:
 - `./build.sh`
 
 ### Usage
