@@ -41,7 +41,7 @@ At the end of all of this, `BOOTX64` will be chainloaded so that we can boot int
 ![image](https://user-images.githubusercontent.com/105472509/205988550-80a6d34f-fdde-4a12-aa56-af762e9e353e.png)
 
 ### Windows Support
-As of now the UEFI driver itself should work on Windows as well, but it may not be able to spoof SecureBoot. The bootkit can also be used for windows, but you might have to edit the path to the bootloader that the bootkit loader will chainload. (`src/loader/EfiLoad.h`)
+As of now the UEFI driver itself should work on Windows as well, but it may not be able to spoof SecureBoot. The bootkit can also be used for Windows, but you might have to edit the path to the bootloader that the bootkit loader will chainload. (`src/loader/EfiLoad.h`)
 
 ### Disclaimer
 The bootkit itself **can** be loaded individually and used to get around hardware-based bans on some games, however in the case that someone gets banned for using the bootkit to evade a ban for a game, I am **not** responsible for that. You have been warned.
