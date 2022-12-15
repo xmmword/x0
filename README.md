@@ -32,7 +32,7 @@ At the end of all of this, `BOOTX64` will be chainloaded so that we can boot int
 - Spoofing SecureBoot status
 - Modification of UEFI variables containing data that could be used to detect a VirtualBox instance
 
-### Usermode Program Features
+### Usermode Program Features (Work In Progress)
 - Locating the address of the UEFI runtime service table
 - Locating the address of the SMBIOS table in kernel virtual memory
 - Dumping and parsing the contents of the UEFI runtime service table
